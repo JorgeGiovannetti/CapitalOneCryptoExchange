@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import Button from "blockdemy-ui/button";
+import Box from "blockdemy-ui/box";
 
-const EditedButton = styled(Button)`
-  background-color: red;
-`;
+const Header = styled(Box)`
+  border-bottom: 1px solid ${props => props.theme.colors.veryLightGrey};
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+`
 
-export { EditedButton };
+export { Header };
