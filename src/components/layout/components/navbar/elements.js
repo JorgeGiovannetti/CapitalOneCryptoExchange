@@ -1,6 +1,11 @@
-import styled from 'styled-components';
-import CommonButton from 'blockdemy-ui/button';
-import Typography from 'blockdemy-ui/typography';
+import styled from "styled-components";
+import CommonButton from "blockdemy-ui/button";
+import Typography from "blockdemy-ui/typography";
+
+const Container = styled.div`
+  height: 66px;
+  width: 100%;
+`;
 
 const Content = styled.div`
   display: flex;
@@ -75,4 +80,13 @@ const Logo = styled.img`
   height: 92%;
 `;
 
-export { Content, Routes, Route, MenuButton, Button, LogoContainer, Logo };
+export {
+  Container,
+  Content,
+  Routes,
+  Route,
+  MenuButton,
+  Button,
+  LogoContainer,
+  Logo
+};

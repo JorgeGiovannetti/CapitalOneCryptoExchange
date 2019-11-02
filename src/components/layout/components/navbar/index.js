@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import Container from "blockdemy-ui/navbar";
 import RoundMenu from "react-md-icon/dist/RoundMenu";
 import {
   // Routes,
@@ -9,7 +8,8 @@ import {
   // Button,
   // Route,
   LogoContainer,
-  Logo
+  Logo,
+  Container
 } from "./elements";
 // import ProfileData from "./components/profile-data";
 
@@ -17,7 +17,7 @@ class Navbar extends Component {
   render() {
     return (
       <Fragment>
-        <Container shrink={false}>
+        <Container>
           <LogoContainer>
             <Logo
               alt="Blockdemy Certs"
