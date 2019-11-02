@@ -4,16 +4,35 @@ import { Card, CardBody, CardFooter } from "blockdemy-ui/card";
 import Button from "blockdemy-ui/button";
 import Box from "blockdemy-ui/box";
 import { Header } from "./elements";
-import Input from "blockdemy-ui/input"
+import Input from "blockdemy-ui/input";
+import { capApi } from "../../utils/api/axios";
+import { capitalOne_key } from "../../utils/config";
 
 class Login extends Component {
+
+
+  // componentDidMount() {
+  //   capApi.get(`/customers?key=${capitalOne_key}`)
+  //     .then(function (response) {
+  //       // handle success
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       // handle error
+  //       console.log(error);
+  //     })
+  //     .finally(function () {
+  //       // always executed
+  //       console.log("Get done.");
+  //     });
+  // }
+
   render() {
     return <Box
       alignItems="center"
       display="flex"
       flexDirection="column"
       p={30}
-      width={1}
     >
       <Card>
         <Header>
@@ -75,7 +94,7 @@ class Login extends Component {
         </Button>
         </CardFooter>
       </Card>
-    </Box>;
+    </Box >;
   }
 }
 
