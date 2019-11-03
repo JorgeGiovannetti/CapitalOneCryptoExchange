@@ -14,7 +14,7 @@ import {
 
 class ProfileMenu extends Component {
   handleLogout = () => {
-    // TODO: Delete id from storage
+    localStorage.clear();
     window.location.reload();
   };
 

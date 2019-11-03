@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Input from "blockdemy-ui/input";
+import Button from "blockdemy-ui/button";
+import RoundFileCopy from "react-md-icon/dist/RoundFileCopy";
 
 const Container = styled.div`
   width: 300px;
@@ -49,4 +51,23 @@ const EthAddress = styled(Input)`
   }
 `;
 
-export { Container, PriceContainer, Icon, Divider, EthAddress };
+const CopyIcon = styled(RoundFileCopy)`
+  font-size: 20px;
+  margin-right: 10px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  svg {
+    font-size: 15px;
+  }
+`
+
+const CopyBtn = styled(Button)`
+  :hover{
+    background-color: lightGrey;
+  }
+`
+
+export { Container, PriceContainer, Icon, Divider, EthAddress, CopyIcon, InputContainer, CopyBtn };

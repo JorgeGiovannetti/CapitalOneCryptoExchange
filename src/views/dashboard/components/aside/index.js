@@ -6,7 +6,10 @@ import {
   PriceContainer,
   Icon,
   Divider,
-  EthAddress
+  EthAddress,
+  CopyIcon,
+  InputContainer,
+  CopyBtn
 } from "./elements";
 import Typography from "blockdemy-ui/typography";
 import withUser from "components/providers/withUser";
@@ -16,6 +19,7 @@ import Avatar from "blockdemy-ui/avatar";
 import { List, ListItem, ListItemText } from "blockdemy-ui/list";
 import { toast } from "theme";
 import Box from "blockdemy-ui/box";
+import Tooltip from "blockdemy-ui/tooltip";
 
 class Aside extends Component {
   constructor(props) {
@@ -52,6 +56,10 @@ class Aside extends Component {
     }
   };
 
+  copyIdToClipboard = () => {
+    navigator.clipboard.writeText(this.state.account);
+  }
+
   render() {
     const { loading, connected, account } = this.state;
     return (
@@ -61,25 +69,35 @@ class Aside extends Component {
           <Typography variant="d2">$13,532</Typography>
         </PriceContainer>
         {connected ? (
-          <EthAddress disabled value={account} />
+          <InputContainer>
+            <EthAddress disabled value={account} />
+            <Tooltip
+              position="bottom"
+              tag="Copy to clipboard"
+            >
+              <CopyBtn onClick={this.copyIdToClipboard} size="small" color="lighterGrey" variant="soft" mt={3} fullWidth>
+                <CopyIcon></CopyIcon>
+              </CopyBtn>
+            </Tooltip>
+          </InputContainer>
         ) : (
-          <Button
-            variant="soft"
-            mx="auto"
-            color="primary"
-            size="small"
-            mt={10}
-            onClick={this.connect}
-          >
-            {loading ? (
-              <Loader color="primary" size="15" />
-            ) : (
-              <Fragment>
-                <Icon src="/static/images/icons/metamask.svg" /> Connect
+            <Button
+              variant="soft"
+              mx="auto"
+              color="primary"
+              size="small"
+              mt={10}
+              onClick={this.connect}
+            >
+              {loading ? (
+                <Loader color="primary" size="15" />
+              ) : (
+                  <Fragment>
+                    <Icon src="/static/images/icons/metamask.svg" /> Connect
               </Fragment>
-            )}
-          </Button>
-        )}
+                )}
+            </Button>
+          )}
         <Typography mt={60} variant="muted">
           Currencies
         </Typography>
@@ -119,21 +137,21 @@ class Aside extends Component {
             </ListItem>
           </List>
         ) : (
-          <Fragment>
-            <List>
-              <ListItem clickable>
-                <Avatar src="/static/images/currencies/capital-one.png" />
-                <ListItemText primary="Capital One" secondary="$130" />
-              </ListItem>
-            </List>
-            <Box p={30}>
-              <Typography textAlign="center" variant="muted">
-                You need to enable your Ethereum wallet to see your crypto
-                balance
+            <Fragment>
+              <List>
+                <ListItem clickable>
+                  <Avatar src="/static/images/currencies/capital-one.png" />
+                  <ListItemText primary="Capital One" secondary="$130" />
+                </ListItem>
+              </List>
+              <Box p={30}>
+                <Typography textAlign="center" variant="muted">
+                  You need to enable your Ethereum wallet to see your crypto
+                  balance
               </Typography>
-            </Box>
-          </Fragment>
-        )}
+              </Box>
+            </Fragment>
+          )}
       </Container>
     );
   }
