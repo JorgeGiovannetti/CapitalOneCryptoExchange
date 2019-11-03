@@ -5,8 +5,9 @@ import Button from "blockdemy-ui/button";
 import Box from "blockdemy-ui/box";
 import { Header } from "./elements";
 import Input from "blockdemy-ui/input";
-// import { capApi } from "../../utils/api/axios";
-// import { capitalOne_key } from "../../utils/config";
+import { capApi } from "../../utils/api/axios";
+import { capitalOne_key } from "../../utils/config";
+import { toast } from "theme";
 
 class Login extends Component {
   constructor(props) {
@@ -20,11 +21,22 @@ class Login extends Component {
   handleInputChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     const { userId } = this.state;
-    localStorage.setItem("userId", userId);
-    window.location.reload();
+    try {
+      const response = await capApi.get(
+        `/customers/${userId}/accounts?key=${capitalOne_key}`
+      );
+      console.log(response);
+      if (response) {
+        localStorage.setItem("userId", userId);
+        window.location.reload();
+      }
+    }
+    catch (e) {
+      toast.error("User not valid", "This user does not exist.")
+    }
   };
 
   render() {
