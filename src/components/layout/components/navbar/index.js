@@ -19,10 +19,7 @@ class Navbar extends Component {
       <Fragment>
         <Container>
           <LogoContainer>
-            <Logo
-              alt="Capitol One CryptoExchange"
-              src="/static/images/brand/logo-black.svg"
-            />
+            <Logo alt="Capital One" src="/static/images/brand/logo-black.svg" />
           </LogoContainer>
           <Content>
             <ProfileData shrink />
