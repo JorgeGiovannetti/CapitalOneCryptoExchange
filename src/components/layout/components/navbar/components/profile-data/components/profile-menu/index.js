@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import withUser from 'components/providers/withUser';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import withUser from "components/providers/withUser";
 import {
   Container,
   PseudoContainer,
@@ -10,20 +9,18 @@ import {
   Header,
   ExitIcon,
   UserIcon
-} from './elements';
+} from "./elements";
 
 class ProfileMenu extends Component {
-
-
   handleLogout = () => {
     console.log("out");
     localStorage.clear();
     window.location.reload();
   };
 
-  myProfile = (userId) => {
+  myProfile = userId => {
     console.log(userId);
-  }
+  };
 
   render() {
     const {
@@ -35,7 +32,9 @@ class ProfileMenu extends Component {
       <Container show={show}>
         <PseudoContainer onClick={toggleProfileMenu}>
           <Content>
-            <Header>{first_name.toUpperCase()} {last_name.toUpperCase()}</Header>
+            <Header>
+              {first_name.toUpperCase()} {last_name.toUpperCase()}
+            </Header>
             <Link to={`/@${userId}/profile`}>
               <Option onClick={this.myProfile(userId)}>
                 <UserIcon />
