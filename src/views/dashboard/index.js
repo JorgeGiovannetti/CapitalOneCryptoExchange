@@ -5,6 +5,7 @@ import Aside from "./components/aside";
 import { Card, CardBody } from "blockdemy-ui/card";
 import Onboarding from "./components/onboarding";
 import Prices from "./components/prices";
+import MainChart from "./components/main-chart";
 
 class Dashboard extends Component {
   render() {
@@ -14,9 +15,7 @@ class Dashboard extends Component {
           <Aside />
           <Row cols="1fr 3fr">
             <Onboarding />
-            <Card>
-              <CardBody>HOLA</CardBody>
-            </Card>
+            <MainChart />
           </Row>
           <Row cols="1fr 1fr">
             <Prices />

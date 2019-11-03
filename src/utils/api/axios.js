@@ -7,7 +7,7 @@ const capApi = axios.create({
 
 const krakenApi = axios.create({
   baseURL: "https://api.kraken.com/0/public/",
-  timeout: 1000
+  timeout: 10000
 });
 
 export { capApi, krakenApi };

@@ -8,6 +8,7 @@
     "blockdemy-ui": "^0.1.0",
     "chart.js": "^2.9.2",
     "dotenv": "^8.2.0",
+    "moment": "^2.24.0",
     "react": "^16.11.0",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.11.0",
