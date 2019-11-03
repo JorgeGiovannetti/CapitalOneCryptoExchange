@@ -5,6 +5,9 @@ import Typography from "blockdemy-ui/typography";
 const Container = styled.div`
   height: 66px;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 300px;
 `;
 
 const Content = styled.div`

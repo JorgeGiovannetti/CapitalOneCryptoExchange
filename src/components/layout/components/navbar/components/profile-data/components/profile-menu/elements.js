@@ -1,6 +1,6 @@
-import styled, { keyframes } from 'styled-components';
-import RoundExitToApp from 'react-md-icon/dist/RoundExitToApp';
-import RoundAccountCircle from 'react-md-icon/dist/RoundAccountCircle';
+import styled, { keyframes } from "styled-components";
+import RoundExitToApp from "react-md-icon/dist/RoundExitToApp";
+import RoundAccountCircle from "react-md-icon/dist/RoundAccountCircle";
 
 const fadeIn = keyframes`
   from {
@@ -49,8 +49,8 @@ const Content = styled.div`
   background: #fff;
   box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
   border-radius: ${props => props.theme.radius};
-  right: 20px;
-  top: 66px;
+  right: 320px;
+  top: 100px;
   overflow: hidden;
   ${props => props.theme.media.tablet`
     width: 100%;
