@@ -19,15 +19,19 @@ class MainChart extends Component {
       options: {
         legend: {
           display: true
-        }
+        },
       },
       data: {
         datasets: [
           {
+            lineTension: 0.5,
             label: "Trades",
             backgroundColor: "rgba(0,0,0,0)",
-            borderWidth: 4,
-            borderColor: theme.colors.primary
+            pointHoverRadius: 5,
+            pointRadius: 1,
+            pointBorderWidth: 0,
+            borderColor: theme.colors.primary,
+
           }
         ]
       }

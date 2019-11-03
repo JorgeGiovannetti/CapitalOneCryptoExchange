@@ -61,6 +61,7 @@ class Aside extends Component {
   }
 
   render() {
+    console.log(this.props.user.accounts);
     const { loading, connected, account } = this.state;
     return (
       <Container>
