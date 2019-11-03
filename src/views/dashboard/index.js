@@ -150,7 +150,8 @@ class Dashboard extends Component {
       DAIBalance,
       BATBalance,
       USDTBalance,
-      REPBalance
+      REPBalance,
+      account
     } = this.state;
     return (
       <Layout>
@@ -167,11 +168,12 @@ class Dashboard extends Component {
             USDTBalance={USDTBalance}
             REPBalance={REPBalance}
             ETH={ETH}
-            ETC={ETC}
             DAI={DAI}
+            ETC={ETC}
             REP={REP}
             BAT={BAT}
             USDT={USDT}
+            account={account}
           />
           <Row cols="1fr 3fr">
             <Onboarding />
@@ -187,7 +189,14 @@ class Dashboard extends Component {
               USDT={USDT}
               getPrices={this.getPrices}
             />
-            <Trade connected={connected} />
+            <Trade
+              web3={this.web3}
+              DAIContract={this.DAI}
+              connected={connected}
+              ETH={ETH}
+              DAI={DAI}
+              account={account}
+            />
           </Row>
         </MainContainer>
       </Layout>

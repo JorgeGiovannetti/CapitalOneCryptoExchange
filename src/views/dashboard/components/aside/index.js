@@ -79,7 +79,7 @@ class Aside extends Component {
   };
 
   render() {
-    const { loading, account, capitalOneBalance } = this.state;
+    const { loading, capitalOneBalance } = this.state;
     const {
       connected,
       ETHBalance,
@@ -91,7 +91,8 @@ class Aside extends Component {
       DAI,
       REP,
       BAT,
-      USDT
+      USDT,
+      account
     } = this.props;
 
     return (
