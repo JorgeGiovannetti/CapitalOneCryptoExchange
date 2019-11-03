@@ -14,7 +14,8 @@ class UserProvider extends Component {
       first_name: "",
       last_name: "",
       address: {},
-      accounts: []
+      accounts: [],
+      loaded: false
     };
   }
 
@@ -23,6 +24,7 @@ class UserProvider extends Component {
       userId: localStorage.getItem("userId")
     });
     if (localStorage.getItem("userId")) this.getUserData();
+    this.setState({ loaded: true });
   };
 
   getAccounts = async () => {
@@ -35,18 +37,26 @@ class UserProvider extends Component {
 
   getUserData = async () => {
     const { userId } = this.state;
-    const { data: { first_name, last_name } } = await capApi.get(
-      `/customers/${userId}?key=${capitalOne_key}`
-    );
+    const {
+      data: { first_name, last_name }
+    } = await capApi.get(`/customers/${userId}?key=${capitalOne_key}`);
     this.setState({ first_name, last_name });
   };
 
   render() {
     const { children } = this.props;
-    const { userId, first_name, last_name, address, accounts } = this.state;
+    const {
+      userId,
+      first_name,
+      last_name,
+      address,
+      accounts,
+      loaded
+    } = this.state;
     return (
       <withUserContext.Provider
         value={{
+          loaded,
           userId,
           first_name,
           last_name,

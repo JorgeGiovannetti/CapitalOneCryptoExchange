@@ -1,8 +1,13 @@
-const axios = require('axios');
+const axios = require("axios");
 
 const capApi = axios.create({
-    baseURL: `http://api.reimaginebanking.com/`,
-    timeout: 1000
+  baseURL: `http://api.reimaginebanking.com/`,
+  timeout: 1000
 });
 
-export { capApi };
+const krakenApi = axios.create({
+  baseURL: "https://api.kraken.com/0/public/",
+  timeout: 1000
+});
+
+export { capApi, krakenApi };
