@@ -38,6 +38,6 @@ const theme = {
 
 const { toast } = new Toast(theme);
 
-const { BlockdemyUIProvider } = new BlockdemyUI(theme);
+const { BlockdemyUIProvider, getTheme } = new BlockdemyUI(theme);
 
-export { BlockdemyUIProvider, toast };
+export { BlockdemyUIProvider, toast, getTheme };

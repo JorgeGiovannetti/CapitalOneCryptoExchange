@@ -1,17 +1,25 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Box from "blockdemy-ui/box";
+import withUser from "components/providers/withUser";
 import Login from "./views/login";
 import Dashboard from "./views/dashboard";
 
-const App = () => (
+const App = ({ user: { userId } }) => (
   <Box>
-    <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/" component={Dashboard} />
-      <Dashboard />
-    </Switch>
+    {!userId && (
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Redirect to="/login" />
+      </Switch>
+    )}
+    {userId && (
+      <Switch>
+        <Route path="/" component={Dashboard} />
+        <Redirect to="/" />
+      </Switch>
+    )}
   </Box>
 );
 
-export default App;
+export default withUser(App);
