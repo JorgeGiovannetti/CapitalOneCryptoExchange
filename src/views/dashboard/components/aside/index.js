@@ -8,7 +8,8 @@ import {
   Divider,
   EthAddress,
   CopyIcon,
-  InputContainer
+  InputContainer,
+  CopyBtn
 } from "./elements";
 import Typography from "blockdemy-ui/typography";
 import withUser from "components/providers/withUser";
@@ -70,17 +71,14 @@ class Aside extends Component {
         {connected ? (
           <InputContainer>
             <EthAddress disabled value={account} />
-            <Fragment>
-              <Tooltip
-                position="bottom"
-                tag="Copy to clipboard"
-              >
-                <Button onClick={this.copyIdToClipboard} size="small" color="lighterGrey" variant="soft" mt={3} fullWidth>
-                  <CopyIcon></CopyIcon>
-                </Button>
-              </Tooltip>
-
-            </Fragment>
+            <Tooltip
+              position="bottom"
+              tag="Copy to clipboard"
+            >
+              <CopyBtn onClick={this.copyIdToClipboard} size="small" color="lighterGrey" variant="soft" mt={3} fullWidth>
+                <CopyIcon></CopyIcon>
+              </CopyBtn>
+            </Tooltip>
           </InputContainer>
         ) : (
             <Button

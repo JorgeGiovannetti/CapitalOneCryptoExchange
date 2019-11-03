@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Input from "blockdemy-ui/input";
+import Button from "blockdemy-ui/button";
 import RoundFileCopy from "react-md-icon/dist/RoundFileCopy";
 
 const Container = styled.div`
@@ -63,4 +64,10 @@ const InputContainer = styled.div`
   }
 `
 
-export { Container, PriceContainer, Icon, Divider, EthAddress, CopyIcon, InputContainer };
+const CopyBtn = styled(Button)`
+  :hover{
+    background-color: lightGrey;
+  }
+`
+
+export { Container, PriceContainer, Icon, Divider, EthAddress, CopyIcon, InputContainer, CopyBtn };
