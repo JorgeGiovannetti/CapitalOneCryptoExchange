@@ -13,10 +13,17 @@ import {
 } from './elements';
 
 class ProfileMenu extends Component {
+
+
   handleLogout = () => {
+    console.log("out");
     localStorage.clear();
     window.location.reload();
   };
+
+  myProfile = (userId) => {
+    console.log(userId);
+  }
 
   render() {
     const {
@@ -30,7 +37,7 @@ class ProfileMenu extends Component {
           <Content>
             <Header>{first_name.toUpperCase()} {last_name.toUpperCase()}</Header>
             <Link to={`/@${userId}/profile`}>
-              <Option>
+              <Option onClick={this.myProfile(userId)}>
                 <UserIcon />
                 My Profile
               </Option>
@@ -45,11 +52,5 @@ class ProfileMenu extends Component {
     );
   }
 }
-
-ProfileMenu.propTypes = {
-  toggleProfileMenu: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  show: PropTypes.bool.isRequired
-};
 
 export default withUser(ProfileMenu);

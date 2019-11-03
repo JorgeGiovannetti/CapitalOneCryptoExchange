@@ -2,11 +2,8 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import RoundMenu from "react-md-icon/dist/RoundMenu";
 import {
-  // Routes,
   Content,
   MenuButton,
-  // Button,
-  // Route,
   LogoContainer,
   Logo,
   Container
@@ -32,11 +29,5 @@ class Navbar extends Component {
     );
   }
 }
-
-Navbar.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  }).isRequired
-};
 
 export default Navbar;

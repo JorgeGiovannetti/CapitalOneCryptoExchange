@@ -55,9 +55,4 @@ class ProfileData extends Component {
   }
 }
 
-ProfileData.propTypes = {
-  auth: PropTypes.object.isRequired,
-  shrink: PropTypes.bool.isRequired
-};
-
 export default withUser(ProfileData);

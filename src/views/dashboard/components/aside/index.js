@@ -45,7 +45,7 @@ class Aside extends Component {
           connected: true,
           account: accounts[0]
         });
-        console.log(accounts);
+        console.log(accounts[0]);
       } catch (err) {
         toast.info(
           "An error has occurred",
@@ -110,7 +110,7 @@ class Aside extends Component {
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/ethereum.png" />
-              <ListItemText primary="Ethereum" secondary="$13,000" />
+              <ListItemText primary="Ethereum" secondary="$150" />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/ethereum-classic.png" />
