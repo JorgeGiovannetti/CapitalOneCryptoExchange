@@ -19,7 +19,7 @@ class MainChart extends Component {
       options: {
         legend: {
           display: true
-        },
+        }
       },
       data: {
         datasets: [
@@ -30,8 +30,7 @@ class MainChart extends Component {
             pointHoverRadius: 5,
             pointRadius: 1,
             pointBorderWidth: 0,
-            borderColor: theme.colors.primary,
-
+            borderColor: theme.colors.primary
           }
         ]
       }
@@ -45,7 +44,7 @@ class MainChart extends Component {
     const dataset = [];
 
     for (let i = 0; i < ETHUSD[0].result.XETHZUSD.length; i++) {
-      labels.push(moment(ETHUSD[0].result.XETHZUSD[i][2] * 1000).format("ll"));
+      labels.push(moment(ETHUSD[0].result.XETHZUSD[i][2] * 1000).format("LTS"));
       dataset.push(Number(ETHUSD[0].result.XETHZUSD[i][0]));
     }
 
