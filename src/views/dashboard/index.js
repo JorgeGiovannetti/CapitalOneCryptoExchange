@@ -9,6 +9,7 @@ import Trade from "./components/trade";
 import MainChart from "./components/main-chart";
 import { krakenApi } from "utils/api/axios";
 import abi from "./abi.json";
+import withUser from "components/providers/withUser";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -44,9 +45,23 @@ class Dashboard extends Component {
       DAIBalance: 0,
       BATBalance: 0,
       USDTalance: 0,
-      REPBalance: 0
+      REPBalance: 0,
+      capitalOneBalance: 0
     };
   }
+
+  componentDidMount = () => {
+    this.getCapitalOneBalance();
+  };
+
+  getCapitalOneBalance = async () => {
+    await this.props.user.getAccounts();
+    let total = 0;
+    for (let i = 0; i < this.props.user.accounts.length; i++) {
+      total += this.props.user.accounts[i].balance;
+    }
+    this.setState({ capitalOneBalance: total });
+  };
 
   setBalance = async () => {
     const { account } = this.state;
@@ -151,7 +166,8 @@ class Dashboard extends Component {
       BATBalance,
       USDTBalance,
       REPBalance,
-      account
+      account,
+      capitalOneBalance
     } = this.state;
     return (
       <Layout>
@@ -162,6 +178,7 @@ class Dashboard extends Component {
             connected={connected}
             setAccount={this.setAccount}
             setBalance={this.setBalance}
+            capitalOneBalance={capitalOneBalance}
             ETHBalance={ETHBalance}
             DAIBalance={DAIBalance}
             BATBalance={BATBalance}
@@ -204,4 +221,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withUser(Dashboard);

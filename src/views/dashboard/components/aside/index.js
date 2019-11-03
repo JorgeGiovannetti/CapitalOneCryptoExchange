@@ -61,25 +61,12 @@ class Aside extends Component {
     }
   };
 
-  getCapitalOneBalance = () => {
-    let total = 0;
-    for (let i = 0; i < this.props.user.accounts.length; i++) {
-      total += this.props.user.accounts[i].balance;
-    }
-    console.log(this.props.user.accounts);
-    this.setState({ capitalOneBalance: total });
-  };
-
   copyIdToClipboard = () => {
     navigator.clipboard.writeText(this.state.account);
   };
 
-  componentDidMount = async () => {
-    await this.getCapitalOneBalance();
-  };
-
   render() {
-    const { loading, capitalOneBalance } = this.state;
+    const { loading } = this.state;
     const {
       connected,
       ETHBalance,
@@ -92,14 +79,25 @@ class Aside extends Component {
       REP,
       BAT,
       USDT,
-      account
+      account,
+      capitalOneBalance
     } = this.props;
+
+    let totalBalance = (
+      Number(capitalOneBalance) +
+      Number(DAIBalance * DAI.USD) +
+      Number(BATBalance * BAT.USD) +
+      Number(USDTBalance * USDT.USD) +
+      Number(REPBalance * REP.USD)
+    ).toFixed(2);
 
     return (
       <Container>
         <PriceContainer>
           <Typography variant="heading">Total</Typography>
-          <Typography variant="d2">$13,532</Typography>
+          <Typography variant="d2">
+            ${account ? totalBalance : capitalOneBalance}
+          </Typography>
         </PriceContainer>
         {connected ? (
           <InputContainer>
