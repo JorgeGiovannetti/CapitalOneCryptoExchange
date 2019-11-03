@@ -19,9 +19,10 @@ class UserProvider extends Component {
   }
 
   componentDidMount = async () => {
-    this.setState({
+    await this.setState({
       userId: localStorage.getItem("userId")
     });
+    if (localStorage.getItem("userId")) this.getUserData();
   };
 
   getAccounts = async () => {
@@ -30,6 +31,14 @@ class UserProvider extends Component {
       `/customers/${userId}/accounts?key=${capitalOne_key}`
     );
     this.setState({ accounts: data });
+  };
+
+  getUserData = async () => {
+    const { userId } = this.state;
+    const { data: { first_name, last_name } } = await capApi.get(
+      `/customers/${userId}?key=${capitalOne_key}`
+    );
+    this.setState({ first_name, last_name });
   };
 
   render() {

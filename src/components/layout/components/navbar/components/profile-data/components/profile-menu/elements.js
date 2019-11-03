@@ -1,8 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import RoundBusiness from 'react-md-icon/dist/RoundBusiness';
 import RoundExitToApp from 'react-md-icon/dist/RoundExitToApp';
-import RoundPlaylistAddCheck from 'react-md-icon/dist/RoundPlaylistAddCheck';
-import RoundSecurity from 'react-md-icon/dist/RoundSecurity';
+import RoundAccountCircle from 'react-md-icon/dist/RoundAccountCircle';
 
 const fadeIn = keyframes`
   from {
@@ -92,17 +90,7 @@ const Header = styled(Option)`
   padding-left: 2.5em;
 `;
 
-const AddressIcon = styled(RoundPlaylistAddCheck)`
-  font-size: 20px;
-  margin-right: 10px;
-`;
-
-const BusinessIcon = styled(RoundBusiness)`
-  font-size: 20px;
-  margin-right: 10px;
-`;
-
-const SecurityIcon = styled(RoundSecurity)`
+const UserIcon = styled(RoundAccountCircle)`
   font-size: 20px;
   margin-right: 10px;
 `;
@@ -118,8 +106,6 @@ export {
   Content,
   Option,
   Header,
-  AddressIcon,
-  BusinessIcon,
-  SecurityIcon,
+  UserIcon,
   ExitIcon
 };

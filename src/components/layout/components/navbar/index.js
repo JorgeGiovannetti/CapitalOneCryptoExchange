@@ -11,7 +11,7 @@ import {
   Logo,
   Container
 } from "./elements";
-// import ProfileData from "./components/profile-data";
+import ProfileData from "./components/profile-data";
 
 class Navbar extends Component {
   render() {
@@ -20,12 +20,12 @@ class Navbar extends Component {
         <Container>
           <LogoContainer>
             <Logo
-              alt="Blockdemy Certs"
+              alt="Capitol One CryptoExchange"
               src="/static/images/brand/logo-black.svg"
             />
           </LogoContainer>
           <Content>
-            {/* <ProfileData shrink /> */}
+            <ProfileData shrink />
             <MenuButton onClick={this.toggleModal}>
               <RoundMenu />
             </MenuButton>

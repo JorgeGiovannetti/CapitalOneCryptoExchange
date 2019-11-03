@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import withAuth from "components/providers/withAuth";
+import withUser from "components/providers/withUser";
 import Menu from "./components/profile-menu";
 import {
   Profile,
@@ -13,21 +13,21 @@ import {
 } from "./elements";
 
 class ProfileData extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     showMenu: false
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMenu: false
+    };
+  }
 
-  // toggleMenu = () => this.setState(({ showMenu }) => ({ showMenu: !showMenu }));
+  toggleMenu = () => this.setState(({ showMenu }) => ({ showMenu: !showMenu }));
 
   render() {
     const {
-      auth: { user }
-      // shrink
+      user: { first_name, last_name, ...user },
+      shrink
     } = this.props;
-    // const { showMenu } = this.state;
+    const { showMenu } = this.state;
     return (
       <Fragment>
         {user && (
@@ -37,18 +37,17 @@ class ProfileData extends Component {
               <Avatar
                 size="36"
                 src={
-                  (user && user.profileImg) ||
-                  "/static/images/general/avatar.png"
+                  "/static/images/general/user.svg"
                 }
               />
               <Text>
-                Bienvenido,
+                Welcome,
                 <Break />
-                <Name>{user && `${user.firstName} ${user.lastName}`}</Name>
+                <Name>{user && `${first_name} ${last_name}`}</Name>
               </Text>
               <DownIcon />
             </Profile>
-            {/* <Menu shrink={shrink} show={showMenu} toggleProfileMenu={this.toggleMenu} /> */}
+            <Menu shrink={shrink} show={showMenu} toggleProfileMenu={this.toggleMenu} />
           </Fragment>
         )}
       </Fragment>
@@ -61,4 +60,4 @@ ProfileData.propTypes = {
   shrink: PropTypes.bool.isRequired
 };
 
-export default withAuth(ProfileData);
+export default withUser(ProfileData);

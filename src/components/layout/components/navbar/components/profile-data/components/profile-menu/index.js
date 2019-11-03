@@ -1,55 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import withAuth from 'components/providers/withAuth';
+import withUser from 'components/providers/withUser';
 import {
   Container,
   PseudoContainer,
   Content,
   Option,
   Header,
-  AddressIcon,
-  BusinessIcon,
-  SecurityIcon,
-  ExitIcon
+  ExitIcon,
+  UserIcon
 } from './elements';
 
 class ProfileMenu extends Component {
   handleLogout = () => {
-    document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
-    document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
+    // TODO: Delete id from storage
     window.location.reload();
   };
 
   render() {
     const {
       toggleProfileMenu,
-      auth: {
-        user: { username, firstName }
-      },
+      user: { userId, first_name, last_name },
       show
     } = this.props;
     return (
       <Container show={show}>
         <PseudoContainer onClick={toggleProfileMenu}>
           <Content>
-            <Header>HOLA {firstName.toUpperCase()}</Header>
-            <Link to={`/@${username}/addresses`}>
+            <Header>{first_name.toUpperCase()} {last_name.toUpperCase()}</Header>
+            <Link to={`/@${userId}/profile`}>
               <Option>
-                <AddressIcon />
-                Mis direcciones
-              </Option>
-            </Link>
-            <Link to={`/@${username}/organizations`}>
-              <Option>
-                <BusinessIcon />
-                Mis organizaciones
-              </Option>
-            </Link>
-            <Link to={`/@${username}/security`}>
-              <Option>
-                <SecurityIcon />
-                Seguridad
+                <UserIcon />
+                My Profile
               </Option>
             </Link>
             <Option onClick={this.handleLogout}>
@@ -69,4 +52,4 @@ ProfileMenu.propTypes = {
   show: PropTypes.bool.isRequired
 };
 
-export default withAuth(ProfileMenu);
+export default withUser(ProfileMenu);
