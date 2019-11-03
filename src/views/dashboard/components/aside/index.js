@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
-import Web3 from "web3";
 import {
   Container,
   PriceContainer,
@@ -20,83 +19,32 @@ import { List, ListItem, ListItemText } from "blockdemy-ui/list";
 import { toast } from "theme";
 import Box from "blockdemy-ui/box";
 import Tooltip from "blockdemy-ui/tooltip";
-import abi from "./abi.json";
 
 class Aside extends Component {
   constructor(props) {
     super(props);
-    this.web3 = new Web3(Web3.givenProvider, null, {});
     this.state = {
       loading: false,
-      installOpen: false,
-      connected: false,
-      DAIBalance: 0,
-      BATBalance: 0,
-      USDTalance: 0,
-      REPBalance: 0
+      installOpen: false
     };
   }
 
   connect = async () => {
-    if (!this.web3.givenProvider) {
+    if (!this.props.web3.givenProvider) {
       this.setState({ installOpen: true });
     } else {
       try {
+        const { setConnection, setAccount, setBalance } = this.props;
         this.setState({ loading: true });
         await window.ethereum.enable();
-        const accounts = await this.web3.eth.getAccounts();
-        await this.setState({
-          loading: false,
-          connected: true,
-          account: accounts[0]
-        });
-
+        const accounts = await this.props.web3.eth.getAccounts();
         this.setState({
-          ETHBalance: await this.web3.eth.getBalance(accounts[0])
+          loading: false
         });
 
-        const { account } = this.state;
-
-        this.DAI = new this.web3.eth.Contract(
-          abi,
-          "0xf4578936f4d766b6626ffd519197cd02affcdde4"
-        );
-
-        this.BAT = new this.web3.eth.Contract(
-          abi,
-          "0x381360180f3da784a32bdf97662a880b5c6bb37a"
-        );
-
-        this.USDT = new this.web3.eth.Contract(
-          abi,
-          "0xd1e2784359613d3245324405c2d977e59f98235c"
-        );
-
-        this.REP = new this.web3.eth.Contract(
-          abi,
-          "0x987285956d76d2a07377ec8966963218837a6bbf"
-        );
-
-        this.DAI.methods
-          .balanceOf(account)
-          .call({ from: account }, (error, result) =>
-            this.setState({ DAIBalance: result })
-          );
-        this.BAT.methods
-          .balanceOf(account)
-          .call({ from: account }, (error, result) =>
-            this.setState({ BATBalance: result })
-          );
-        this.USDT.methods
-          .balanceOf(account)
-          .call({ from: account }, (error, result) =>
-            this.setState({ USDTBalance: result })
-          );
-        this.REP.methods
-          .balanceOf(account)
-          .call({ from: account }, (error, result) =>
-            this.setState({ REPBalance: result })
-          );
+        setConnection(true);
+        await setAccount(accounts[0]);
+        setBalance();
       } catch (err) {
         toast.info(
           "An error has occurred",
@@ -112,16 +60,20 @@ class Aside extends Component {
   };
 
   render() {
+    const { loading, account } = this.state;
     const {
-      loading,
-      connected,
-      account,
       ETHBalance,
       DAIBalance,
       BATBalance,
       USDTBalance,
-      REPBalance
-    } = this.state;
+      REPBalance,
+      ETH,
+      DAI,
+      REP,
+      BAT,
+      USDT
+    } = this.props;
+    const { connected } = this.props;
     return (
       <Container>
         <PriceContainer>
@@ -170,34 +122,59 @@ class Aside extends Component {
           <List>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/capital-one.png" />
-              <ListItemText primary="Capital One" secondary="$130" />
+              <ListItemText primary="Capital One" secondary="$130 USD" />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/ethereum.png" />
-              <ListItemText primary="Ethereum" secondary={`$${ETHBalance}`} />
+              <ListItemText
+                primary="Ethereum"
+                secondary={`$${ETHBalance.toFixed(2)} ETH - $${(
+                  ETHBalance * ETH.USD
+                ).toFixed(2)} USD`}
+              />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/ethereum-classic.png" />
-              <ListItemText primary="Ethereum Classic" secondary="$0" />
+              <ListItemText
+                primary="Ethereum Classic"
+                secondary="$0 ETC- $0 USD"
+              />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/dai.png" />
-              <ListItemText primary="Dai" secondary={`$${DAIBalance}`} />
+              <ListItemText
+                primary="Dai"
+                secondary={`$${DAIBalance} DAI - $${(
+                  DAIBalance * DAI.USD
+                ).toFixed(2)} USD`}
+              />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/basic-attention-token.svg" />
               <ListItemText
                 primary="Basic Attention Token"
-                secondary={`$${BATBalance}`}
+                secondary={`$${BATBalance} BAT - $${(
+                  BATBalance * BAT.USD
+                ).toFixed(2)} USD`}
               />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/tether.png" />
-              <ListItemText primary="Tether" secondary={`$${USDTBalance}`} />
+              <ListItemText
+                primary="Tether"
+                secondary={`$${USDTBalance} USDT - $${(
+                  USDTBalance * USDT.USD
+                ).toFixed(2)} USD`}
+              />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/augur.png" />
-              <ListItemText primary="Augur" secondary={`$${REPBalance}`} />
+              <ListItemText
+                primary="Augur"
+                secondary={`$${REPBalance} REP - $${(
+                  REPBalance * REP.USD
+                ).toFixed(2)} USD`}
+              />
             </ListItem>
           </List>
         ) : (
