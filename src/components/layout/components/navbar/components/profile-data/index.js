@@ -33,12 +33,7 @@ class ProfileData extends Component {
           <Fragment>
             <Divider />
             <Profile onClick={this.toggleMenu}>
-              <Avatar
-                size="36"
-                src={
-                  "/static/images/general/user.svg"
-                }
-              />
+              <Avatar size="36" src={"/static/images/general/user.svg"} />
               <Text>
                 Welcome,
                 <Break />
@@ -46,7 +41,11 @@ class ProfileData extends Component {
               </Text>
               <DownIcon />
             </Profile>
-            <Menu shrink={shrink} show={showMenu} toggleProfileMenu={this.toggleMenu} />
+            <Menu
+              shrink={shrink}
+              show={showMenu}
+              toggleProfileMenu={this.toggleMenu}
+            />
           </Fragment>
         )}
       </Fragment>
