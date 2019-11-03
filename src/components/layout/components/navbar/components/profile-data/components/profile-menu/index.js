@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import withAuth from 'components/providers/withAuth';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import withAuth from "components/providers/withAuth";
 import {
   Container,
   PseudoContainer,
@@ -12,12 +12,14 @@ import {
   BusinessIcon,
   SecurityIcon,
   ExitIcon
-} from './elements';
+} from "./elements";
 
 class ProfileMenu extends Component {
   handleLogout = () => {
-    document.cookie = 'token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
-    document.cookie = 'userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;path=/;';
+    document.cookie =
+      "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;path=/;";
+    document.cookie =
+      "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;path=/;";
     window.location.reload();
   };
 
