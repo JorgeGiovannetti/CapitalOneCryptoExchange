@@ -6,7 +6,7 @@ import Typography from "blockdemy-ui/typography";
 import Avatar from "blockdemy-ui/avatar";
 import { getTheme } from "theme";
 import Box from "blockdemy-ui/box";
-import { krakenApi } from "utils/api/axios";
+import ETHUSD from "./ETHUSD.json";
 
 const theme = getTheme();
 
@@ -22,15 +22,6 @@ class MainChart extends Component {
         }
       },
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
         datasets: [
           {
             label: "Trades",
@@ -45,20 +36,17 @@ class MainChart extends Component {
 
   getTrades = async () => {
     const { data } = this.state;
-    const { data: response } = await krakenApi.get("/Spread?pair=ETHUSD");
 
     const labels = [];
     const dataset = [];
 
-    console.log(response);
-
-    for (let i = 0; i < response.result.kength; i++) {
-      labels.push(moment(response.result.XETHZUSD[i][2]).format("LL"));
-      dataset.push(Number(response.result.XETHZUSD[i][0]));
+    for (let i = 0; i < ETHUSD[0].result.XETHZUSD.length; i++) {
+      labels.push(moment(ETHUSD[0].result.XETHZUSD[i][2] * 1000).format("ll"));
+      dataset.push(Number(ETHUSD[0].result.XETHZUSD[i][0]));
     }
 
     data.labels = labels;
-    data.datasets[0].dataset = dataset;
+    data.datasets[0].data = dataset;
 
     this.setState({
       data
