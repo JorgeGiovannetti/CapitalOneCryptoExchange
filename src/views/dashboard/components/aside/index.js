@@ -30,6 +30,7 @@ class Aside extends Component {
       loading: false,
       installOpen: false,
       connected: false,
+      capitalOneBalance: 0,
       DAIBalance: 0,
       BATBalance: 0,
       USDTalance: 0,
@@ -107,8 +108,20 @@ class Aside extends Component {
     }
   };
 
+  getCapitalOneBalance = () => {
+    let total = 0;
+    for (let i = 0; i < this.props.user.accounts.length; i++) {
+      total += this.props.user.accounts[i].balance;
+    }
+    this.setState({ capitalOneBalance: total });
+  }
+
   copyIdToClipboard = () => {
     navigator.clipboard.writeText(this.state.account);
+  };
+
+  componentDidMount = async () => {
+    await this.getCapitalOneBalance();
   };
 
   render() {
@@ -116,12 +129,14 @@ class Aside extends Component {
       loading,
       connected,
       account,
+      capitalOneBalance,
       ETHBalance,
       DAIBalance,
       BATBalance,
       USDTBalance,
       REPBalance
     } = this.state;
+
     return (
       <Container>
         <PriceContainer>
@@ -145,23 +160,23 @@ class Aside extends Component {
             </Tooltip>
           </InputContainer>
         ) : (
-          <Button
-            variant="soft"
-            mx="auto"
-            color="primary"
-            size="small"
-            mt={10}
-            onClick={this.connect}
-          >
-            {loading ? (
-              <Loader color="primary" size="15" />
-            ) : (
-              <Fragment>
-                <Icon src="/static/images/icons/metamask.svg" /> Connect
+            <Button
+              variant="soft"
+              mx="auto"
+              color="primary"
+              size="small"
+              mt={10}
+              onClick={this.connect}
+            >
+              {loading ? (
+                <Loader color="primary" size="15" />
+              ) : (
+                  <Fragment>
+                    <Icon src="/static/images/icons/metamask.svg" /> Connect
               </Fragment>
-            )}
-          </Button>
-        )}
+                )}
+            </Button>
+          )}
         <Typography mt={60} variant="muted">
           Currencies
         </Typography>
@@ -170,7 +185,7 @@ class Aside extends Component {
           <List>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/capital-one.png" />
-              <ListItemText primary="Capital One" secondary="$130" />
+              <ListItemText primary="Capital One" secondary={`$${capitalOneBalance}`} />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/ethereum.png" />
@@ -201,21 +216,21 @@ class Aside extends Component {
             </ListItem>
           </List>
         ) : (
-          <Fragment>
-            <List>
-              <ListItem clickable>
-                <Avatar src="/static/images/currencies/capital-one.png" />
-                <ListItemText primary="Capital One" secondary="$130" />
-              </ListItem>
-            </List>
-            <Box p={30}>
-              <Typography textAlign="center" variant="muted">
-                You need to enable your Ethereum wallet to see your crypto
-                balance
+            <Fragment>
+              <List>
+                <ListItem clickable>
+                  <Avatar src="/static/images/currencies/capital-one.png" />
+                  <ListItemText primary="Capital One" secondary={`$${capitalOneBalance}`} />
+                </ListItem>
+              </List>
+              <Box p={30}>
+                <Typography textAlign="center" variant="muted">
+                  You need to enable your Ethereum wallet to see your crypto
+                  balance
               </Typography>
-            </Box>
-          </Fragment>
-        )}
+              </Box>
+            </Fragment>
+          )}
       </Container>
     );
   }
