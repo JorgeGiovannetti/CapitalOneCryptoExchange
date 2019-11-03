@@ -25,7 +25,13 @@ class Aside extends Component {
     super(props);
     this.state = {
       loading: false,
-      installOpen: false
+      installOpen: false,
+      connected: false,
+      capitalOneBalance: 0,
+      DAIBalance: 0,
+      BATBalance: 0,
+      USDTalance: 0,
+      REPBalance: 0
     };
   }
 
@@ -55,13 +61,27 @@ class Aside extends Component {
     }
   };
 
+  getCapitalOneBalance = () => {
+    let total = 0;
+    for (let i = 0; i < this.props.user.accounts.length; i++) {
+      total += this.props.user.accounts[i].balance;
+    }
+    console.log(this.props.user.accounts);
+    this.setState({ capitalOneBalance: total });
+  };
+
   copyIdToClipboard = () => {
     navigator.clipboard.writeText(this.state.account);
   };
 
+  componentDidMount = async () => {
+    await this.getCapitalOneBalance();
+  };
+
   render() {
-    const { loading, account } = this.state;
+    const { loading, account, capitalOneBalance } = this.state;
     const {
+      connected,
       ETHBalance,
       DAIBalance,
       BATBalance,
@@ -73,7 +93,7 @@ class Aside extends Component {
       BAT,
       USDT
     } = this.props;
-    const { connected } = this.props;
+
     return (
       <Container>
         <PriceContainer>
@@ -122,7 +142,10 @@ class Aside extends Component {
           <List>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/capital-one.png" />
-              <ListItemText primary="Capital One" secondary="$130 USD" />
+              <ListItemText
+                primary="Capital One"
+                secondary={`$${capitalOneBalance}`}
+              />
             </ListItem>
             <ListItem clickable>
               <Avatar src="/static/images/currencies/ethereum.png" />
@@ -182,7 +205,10 @@ class Aside extends Component {
             <List>
               <ListItem clickable>
                 <Avatar src="/static/images/currencies/capital-one.png" />
-                <ListItemText primary="Capital One" secondary="$130" />
+                <ListItemText
+                  primary="Capital One"
+                  secondary={`$${capitalOneBalance}`}
+                />
               </ListItem>
             </List>
             <Box p={30}>
